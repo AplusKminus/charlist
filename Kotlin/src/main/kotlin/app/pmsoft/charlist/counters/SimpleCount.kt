@@ -1,8 +1,6 @@
 package app.pmsoft.charlist.counters
 
 data class SimpleCount(
-    override val type: Count.Type,
-    override val fileExtension: String,
     override val singles: Map<Char, Int>,
     override val bigrams: Map<String, Int>,
     override val trigrams: Map<String, Int>
@@ -10,16 +8,6 @@ data class SimpleCount(
 
     override fun toString(): String {
         val builder = StringBuilder()
-            .append("Character statistics for ")
-            .append(typeString)
-            .append(" of ")
-            .append(fileExtension)
-            .append(" files:\n")
-        val headLineLength = builder.length - 1
-        for (i in 1..headLineLength) {
-            builder.append('=')
-        }
-        builder.append('\n')
         builder.append("Single characters (")
         builder.append(totalTrigrams)
         builder.append("):\n")
@@ -69,9 +57,4 @@ data class SimpleCount(
     override val totalCharacters = singles.values.sum()
     override val totalBigrams = bigrams.values.sum()
     override val totalTrigrams = trigrams.values.sum()
-
-    private val typeString = when (type) {
-        Count.Type.CONTENT -> "file contents"
-        Count.Type.NAME -> "file name"
-    }
 }

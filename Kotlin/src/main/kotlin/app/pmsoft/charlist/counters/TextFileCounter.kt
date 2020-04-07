@@ -7,7 +7,7 @@ import java.io.StringReader
 import java.util.*
 import kotlin.collections.HashMap
 
-open class TextFileCounter(private val alphabet: Alphabet, private val extension: String) : Counter {
+open class TextFileCounter(private val alphabet: Alphabet) : Counter {
 
     private var nMinus2 = ' '
     private var nMinus1 = ' '
@@ -53,8 +53,6 @@ open class TextFileCounter(private val alphabet: Alphabet, private val extension
         synchronized(this) {
             count(InputStreamReader(file.inputStream(), Charsets.UTF_8))
             return SimpleCount(
-                Count.Type.CONTENT,
-                extension,
                 HashMap(singles),
                 HashMap(bigrams),
                 HashMap(trigrams)
@@ -66,8 +64,6 @@ open class TextFileCounter(private val alphabet: Alphabet, private val extension
         synchronized(this) {
             count(StringReader(file.name))
             return SimpleCount(
-                Count.Type.NAME,
-                extension,
                 HashMap(singles),
                 HashMap(bigrams),
                 HashMap(trigrams)
