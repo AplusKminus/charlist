@@ -24,7 +24,7 @@ interface Alphabet {
             Alphabet {
 
             override fun transform(char: Char): String? {
-                return transformations[char.toLowerCase()]
+                return transformations[char] ?: transformations[char.toLowerCase()]
             }
         }
     }
