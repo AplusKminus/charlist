@@ -57,4 +57,20 @@ data class SimpleCount(
     override val totalCharacters = singles.values.sum()
     override val totalBigrams = bigrams.values.sum()
     override val totalTrigrams = trigrams.values.sum()
+
+    override fun plus(other: Count): Count {
+        val newSingles = singles.toMutableMap()
+        val newBigrams = bigrams.toMutableMap()
+        val newTrigrams = trigrams.toMutableMap()
+        for (entry in other.singles.entries) {
+            newSingles[entry.key] = entry.value + (newSingles[entry.key] ?: 0)
+        }
+        for (entry in other.bigrams.entries) {
+            newBigrams[entry.key] = entry.value + (newBigrams[entry.key] ?: 0)
+        }
+        for (entry in other.trigrams.entries) {
+            newTrigrams[entry.key] = entry.value + (newTrigrams[entry.key] ?: 0)
+        }
+        return SimpleCount(newSingles, newBigrams, newTrigrams)
+    }
 }

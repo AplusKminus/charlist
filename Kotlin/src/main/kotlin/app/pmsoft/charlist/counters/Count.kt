@@ -9,4 +9,6 @@ interface Count {
     val totalCharacters: Int
     val totalBigrams: Int
     val totalTrigrams: Int
+
+    operator fun plus(other: Count): Count
 }
