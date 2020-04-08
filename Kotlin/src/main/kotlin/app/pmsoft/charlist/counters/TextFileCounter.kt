@@ -7,7 +7,7 @@ import java.io.StringReader
 import java.util.*
 import kotlin.collections.HashMap
 
-open class TextFileCounter(private val alphabet: Alphabet) : Counter {
+open class TextFileCounter(private val keySet: KeySet) : Counter {
 
     private var nMinus2 = ' '
     private var nMinus1 = ' '
@@ -76,7 +76,7 @@ open class TextFileCounter(private val alphabet: Alphabet) : Counter {
         for (rawChar in charBuffer) {
             readQueue.addAll(
                 handleMissingChar(
-                    alphabet.transform(rawChar)
+                    keySet.transform(rawChar)
                 )
             )
         }
@@ -111,7 +111,7 @@ open class TextFileCounter(private val alphabet: Alphabet) : Counter {
             for (rawChar in charBuffer) {
                 readQueue.addAll(
                     handleMissingChar(
-                        alphabet.transform(rawChar)
+                        keySet.transform(rawChar)
                     )
                 )
             }
