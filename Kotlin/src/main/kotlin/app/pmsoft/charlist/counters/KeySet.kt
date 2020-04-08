@@ -4,6 +4,8 @@ import java.io.File
 
 interface KeySet {
 
+    val name: String
+
     fun transform(char: Char): String?
 
     companion object {
@@ -17,10 +19,10 @@ interface KeySet {
                     entries[line[0]] = line.substring(1)
                 }
             }
-            return KeySetFromFile(entries)
+            return KeySetFromFile(file.name.substring(0 until file.name.length - 7), entries)
         }
 
-        private class KeySetFromFile(private val transformations: Map<Char, String>) :
+        private class KeySetFromFile(override val name: String, private val transformations: Map<Char, String>) :
             KeySet {
 
             override fun transform(char: Char): String? {
