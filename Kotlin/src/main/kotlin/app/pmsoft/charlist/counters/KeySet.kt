@@ -26,6 +26,9 @@ interface KeySet {
             KeySet {
 
             override fun transform(char: Char): String? {
+                if (char == '\n') {
+                    return char.toString()
+                }
                 return transformations[char] ?: transformations[char.toLowerCase()]
             }
         }
