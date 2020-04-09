@@ -2,6 +2,9 @@ package app.pmsoft.charlist
 
 import app.pmsoft.charlist.counters.KeySet
 import app.pmsoft.charlist.counters.TextFileCounter
+import app.pmsoft.charlist.model.ContentType
+import app.pmsoft.charlist.model.Result
+import app.pmsoft.charlist.persistence.ResultToCSV
 import java.io.File
 
 fun main() {
@@ -16,4 +19,12 @@ fun main() {
     println(nameCount)
     println("Character statistics for the file content:")
     println(contentCount)
+
+    val nameResult = Result(nameCount, ContentType.FILE_NAMES, "-", keySet.name)
+    val contentResult = Result(contentCount, ContentType.TEXT, "German", keySet.name)
+    val nameFile = File("out/nameResult.csv")
+    val contentFile = File("out/contentResult.csv")
+    val writer = ResultToCSV(",", "\n")
+    writer.toCSV(nameResult, nameFile)
+    writer.toCSV(contentResult, contentFile)
 }
